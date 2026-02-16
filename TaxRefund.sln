@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxRefund", "TaxRefund\TaxRefund.csproj", "{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TRS Setup", "TRS Setup\TRS Setup.vdproj", "{C5A9030F-08B4-40C5-95DE-EA901AFE707D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|ARM.Build.0 = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|x64.Build.0 = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Debug|x86.Build.0 = Debug|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|ARM.Build.0 = Release|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|ARM64.Build.0 = Release|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|x64.ActiveCfg = Release|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|x64.Build.0 = Release|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|x86.ActiveCfg = Release|Any CPU
+		{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}.Release|x86.Build.0 = Release|Any CPU
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Debug|Any CPU.ActiveCfg = Debug
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Debug|ARM.ActiveCfg = Debug
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Debug|ARM64.ActiveCfg = Debug
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Debug|x64.ActiveCfg = Debug
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Debug|x86.ActiveCfg = Debug
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Release|Any CPU.ActiveCfg = Release
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Release|ARM.ActiveCfg = Release
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Release|ARM64.ActiveCfg = Release
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Release|x64.ActiveCfg = Release
+		{C5A9030F-08B4-40C5-95DE-EA901AFE707D}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80D75D01-E50F-4344-AB78-3610514210BD}
+	EndGlobalSection
+EndGlobal
