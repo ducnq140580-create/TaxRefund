@@ -33,7 +33,6 @@ namespace TaxRefund
         private bool _isLoggingOut = false;
         private bool _warningShown = false;
 
-
         private NotifyIcon trayIcon;
         private ContextMenuStrip trayMenu;
         private string loginName;
@@ -56,8 +55,7 @@ namespace TaxRefund
             this.FormClosing += MDIParentMain_FormClosing;
 
             SetupWeatherTimer();
-        }
-
+        } 
         private void SetupWeatherTimer()
         {
             // 2. Set the interval to 1 hour (3,600,000 ms)
@@ -605,16 +603,20 @@ namespace TaxRefund
         {
             try
             {
-                //// Close the current Main Form
-                //this.Close();
+                // Close the current Main Form
+                this.Close();
 
                 frmLogin fLogin = new frmLogin
                 {
                     StartPosition = FormStartPosition.CenterParent,
                     Dock = DockStyle.Fill,
                 };
-                //fLogin.StartPosition = FormStartPosition.CenterParent;
-                //fLogin.Dock = DockStyle.Fill;
+
+                // Keep MDIParentMain informed of the login form's active state
+                //fLogin.Activated += (s, ev) => SetLoggedIn(true);
+                //fLogin.Deactivate += (s, ev) => SetLoggedIn(false);
+                //fLogin.FormClosed += (s, ev) => SetLoggedIn(false);
+
                 fLogin.Show();
                 fLogin.Focus();
             }
@@ -702,10 +704,7 @@ namespace TaxRefund
             else
             {
                 MessageBox.Show("Cửa sổ bạn chọn hiện đang mở. Nhấn Ctrl + F6 để chuyển màn hình nghiệp vụ.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                fTracuu.Activate();
-                //this.fTracuuTK.WindowState = FormWindowState.Maximized;
-                //this.fTracuuTK.Focus();
-                //this.fTracuuTK.BringToFront();
+                fTracuu.Activate();               
             }
         }
 
@@ -785,26 +784,30 @@ namespace TaxRefund
                 }
 
                 // 7. Show login form
-                frmLogin loginForm = new frmLogin();
-                loginForm.StartPosition = FormStartPosition.CenterScreen;
+                frmLogin fLogin = new frmLogin();
+                fLogin.StartPosition = FormStartPosition.CenterScreen;
+
+                //fLogin.Activated += (s, ev) => SetLoggedIn(true);
+                //fLogin.Deactivate += (s, ev) => SetLoggedIn(false);
+                //fLogin.FormClosed += (s, ev) => SetLoggedIn(false);
 
                 // 8. Hide current form
                 this.Hide();
 
                 // 9. Show login form
-                loginForm.ShowDialog();
+                fLogin.ShowDialog();
 
                 // 10. If login was successful, the login form should open a new main form
                 // If we get here and login was cancelled, close the application
-                if (!_isLoggedIn)
-                {
-                    Application.Exit();
-                }
-                else
-                {
-                    // If for some reason we're still logged in, close this form
-                    this.Close();
-                }
+                //if (_isLoggedIn)
+                //{
+                //    Application.Restart();
+                //}
+                //else
+                //{
+                //    // If for some reason we're still logged in, close this form
+                //    this.Close();
+                //}
             }
             catch (Exception ex)
             {
@@ -819,7 +822,7 @@ namespace TaxRefund
         {
             try
             {
-                // Ask for confirmation
+                // 1. Ask for confirmation
                 DialogResult confirm = MessageBox.Show(
                     "Are you sure you want to log out?",
                     "Confirm Logout",
@@ -830,31 +833,50 @@ namespace TaxRefund
                 if (confirm != DialogResult.Yes)
                     return;
 
-                // Set logging out flag
+                // 2. Set logging out flag to prevent close dialog from showing
                 _isLoggingOut = true;
 
-                // Stop timers
-                StopIdleTimer();
+                // 3. Stop all timers
+
+                //StopIdleTimer();
                 if (weatherTimer != null)
                 {
                     weatherTimer.Stop();
+                    weatherTimer.Dispose();
                 }
 
-                // Update status
+                // 4. Update login status
                 _isLoggedIn = false;
 
-                // Clean up tray icon
+                // 5. Clean up tray icon
                 if (trayIcon != null)
                 {
                     trayIcon.Visible = false;
                     trayIcon.Dispose();
+                    trayIcon = null;
                 }
 
-                // Restart application
-                Application.Restart();
+                if (trayMenu != null)
+                {
+                    trayMenu.Dispose();
+                    trayMenu = null;
+                }
 
-                // Close current instance
-                this.Close();
+                // 6. Close all child forms
+                foreach (Form childForm in MdiChildren)
+                {
+                    childForm.Close();
+                }
+
+                // 7. Show login form
+                frmLogin fLogin = new frmLogin();
+                fLogin.StartPosition = FormStartPosition.CenterScreen;
+
+                // 8. Hide current form
+                this.Hide();
+
+                // 9. Show login form
+                fLogin.ShowDialog();                
             }
             catch (Exception ex)
             {
@@ -867,7 +889,8 @@ namespace TaxRefund
         // Add this method to handle logout from menu item
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Logout(); // or LogoutWithRestart() depending on your preference
+            Logout(); // Call the logout function
+            //LogoutWithRestart(); // or Logout() depending on your preference
         }
 
         // Update your constructor to add the logout menu item
@@ -916,60 +939,8 @@ namespace TaxRefund
 
             // 3. Attach it to the label
             lblTenCC.ContextMenuStrip = dropdownMenu;
-
-            //// Add logout to main menu if needed
-            //AddLogoutToMainMenu();
         }
-
-        // Method to add logout to the main menu
-        private void AddLogoutToMainMenu()
-        {
-            // Check if logout menu item already exists
-            bool logoutExists = false;
-            foreach (ToolStripItem item in menuStrip.Items)
-            {
-                if (item.Text == "Logout")
-                {
-                    logoutExists = true;
-                    break;
-                }
-            }
-
-            // Add logout to file menu if it doesn't exist
-            if (!logoutExists)
-            {
-                // Find the File menu or create one
-                ToolStripMenuItem fileMenu = null;
-                foreach (ToolStripItem item in menuStrip.Items)
-                {
-                    if (item.Text.Contains("File") || item.Text.Contains("Tệp"))
-                    {
-                        fileMenu = item as ToolStripMenuItem;
-                        break;
-                    }
-                }
-
-                if (fileMenu == null)
-                {
-                    fileMenu = new ToolStripMenuItem("File");
-                    menuStrip.Items.Insert(0, fileMenu);
-                }
-
-                // Add separator if needed
-                if (fileMenu.DropDownItems.Count > 0)
-                {
-                    fileMenu.DropDownItems.Add(new ToolStripSeparator());
-                }
-
-                // Add logout item
-                ToolStripMenuItem logoutMenuItem = new ToolStripMenuItem("Logout");
-                //logoutMenuItem.Image = Properties.Resources.logout_icon; // Add an icon resource if available
-                logoutMenuItem.ShortcutKeys = Keys.Control | Keys.L;
-                logoutMenuItem.Click += logoutToolStripMenuItem_Click;
-                fileMenu.DropDownItems.Add(logoutMenuItem);
-            }
-        }
-
+       
         // Update the PerformRestart method to use the new Logout function
         private void PerformRestart()
         {
@@ -990,7 +961,7 @@ namespace TaxRefund
                 MessageBox.Show(reason, "Session Ended", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            LogoutWithRestart();
+            Logout();
         }
 
         // Update the AutoLogout method to use ForceLogout
@@ -1007,7 +978,6 @@ namespace TaxRefund
             );
 
             ForceLogout("Session terminated due to inactivity.");
-
         }
     }
 }

@@ -1073,8 +1073,8 @@ namespace TaxRefund
         {
             Utility ut = new Utility();
             var conn = ut.OpenDB();
-
-            InitializeAutoComplete();
+      
+            //InitializeAutoComplete();
             InitializeLoginPasswordControls();
             txtPassword.PasswordChar = '*';
             txtPassword.UseSystemPasswordChar = true;
