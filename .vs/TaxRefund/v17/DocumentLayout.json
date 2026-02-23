@@ -1,26 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\C#\\TaxRefund\\",
+  "WorkspaceRootPath": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|e:\\c#\\taxrefund\\taxrefund\\mdiparentmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|c:\\users\\hp\\source\\repos\\ducnq140580-create\\taxrefund\\taxrefund\\frmtracuu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:taxrefund\\frmtracuu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\taxrefund\\frmtracuu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:taxrefund\\frmtracuu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\frmLogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:TaxRefund\\frmLogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\taxrefund\\mdiparentmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:taxrefund\\mdiparentmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|E:\\C#\\TaxRefund\\taxrefund\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:taxrefund\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|E:\\C#\\TaxRefund\\taxrefund\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:taxrefund\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|E:\\C#\\TaxRefund\\taxrefund\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:taxrefund\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|E:\\C#\\TaxRefund\\taxrefund\\mdiparentmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\taxrefund\\mdiparentmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:taxrefund\\mdiparentmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:TaxRefund\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -41,61 +45,76 @@
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmLogin.cs",
-              "DocumentMoniker": "E:\\C#\\TaxRefund\\TaxRefund\\frmLogin.cs",
-              "RelativeDocumentMoniker": "TaxRefund\\frmLogin.cs",
-              "ToolTip": "E:\\C#\\TaxRefund\\TaxRefund\\frmLogin.cs",
-              "RelativeToolTip": "TaxRefund\\frmLogin.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAADMEAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T02:35:43.168Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "frmLogin.cs [Design]",
-              "DocumentMoniker": "E:\\C#\\TaxRefund\\TaxRefund\\frmLogin.cs",
-              "RelativeDocumentMoniker": "TaxRefund\\frmLogin.cs",
-              "ToolTip": "E:\\C#\\TaxRefund\\TaxRefund\\frmLogin.cs [Design]",
-              "RelativeToolTip": "TaxRefund\\frmLogin.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T02:35:35.61Z",
-              "EditorCaption": " [Design]"
+              "$type": "Bookmark",
+              "Name": "ST:1705614075:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "frmTracuu.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\frmTracuu.cs",
+              "RelativeDocumentMoniker": "TaxRefund\\frmTracuu.cs",
+              "ToolTip": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\frmTracuu.cs",
+              "RelativeToolTip": "TaxRefund\\frmTracuu.cs",
+              "ViewState": "AgIAAIQWAAAAAAAAAAAowNcVAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T03:43:40.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmTracuu.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\frmTracuu.cs",
+              "RelativeDocumentMoniker": "TaxRefund\\frmTracuu.cs",
+              "ToolTip": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\frmTracuu.cs [Design]",
+              "RelativeToolTip": "TaxRefund\\frmTracuu.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T03:43:37.911Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmLogin.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\frmLogin.cs",
+              "RelativeDocumentMoniker": "TaxRefund\\frmLogin.cs",
+              "ToolTip": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\frmLogin.cs",
+              "RelativeToolTip": "TaxRefund\\frmLogin.cs",
+              "ViewState": "AgIAABUEAAAAAAAAAAAIwDMEAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T02:35:43.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "MDIParentMain.cs",
-              "DocumentMoniker": "E:\\C#\\TaxRefund\\TaxRefund\\MDIParentMain.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\MDIParentMain.cs",
               "RelativeDocumentMoniker": "TaxRefund\\MDIParentMain.cs",
-              "ToolTip": "E:\\C#\\TaxRefund\\TaxRefund\\MDIParentMain.cs",
+              "ToolTip": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\MDIParentMain.cs",
               "RelativeToolTip": "TaxRefund\\MDIParentMain.cs",
               "ViewState": "AgIAALQDAAAAAAAAAAAwwNMDAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T03:04:45.516Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T03:04:45.516Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "MDIParentMain.cs [Design]",
-              "DocumentMoniker": "E:\\C#\\TaxRefund\\TaxRefund\\MDIParentMain.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\MDIParentMain.cs",
               "RelativeDocumentMoniker": "TaxRefund\\MDIParentMain.cs",
-              "ToolTip": "E:\\C#\\TaxRefund\\TaxRefund\\MDIParentMain.cs [Design]",
+              "ToolTip": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\MDIParentMain.cs [Design]",
               "RelativeToolTip": "TaxRefund\\MDIParentMain.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-10T03:04:35.697Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
-              "DocumentMoniker": "E:\\C#\\TaxRefund\\TaxRefund\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\Program.cs",
               "RelativeDocumentMoniker": "TaxRefund\\Program.cs",
-              "ToolTip": "E:\\C#\\TaxRefund\\TaxRefund\\Program.cs",
+              "ToolTip": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\Program.cs",
               "RelativeToolTip": "TaxRefund\\Program.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAgwDwAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

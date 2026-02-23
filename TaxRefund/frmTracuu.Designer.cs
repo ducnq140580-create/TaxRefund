@@ -30,11 +30,11 @@ namespace TaxRefund
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtshowRows = new System.Windows.Forms.TextBox();
             this.lblLoginName = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
@@ -111,6 +111,8 @@ namespace TaxRefund
             this.label4 = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dataGridView1 = new TaxRefund.ProgressDataGridView();
+            this.rdoExcel = new System.Windows.Forms.RadioButton();
+            this.rdoOpenOffice = new System.Windows.Forms.RadioButton();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -124,7 +126,7 @@ namespace TaxRefund
             this.txtshowRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtshowRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtshowRows.ForeColor = System.Drawing.Color.DarkBlue;
-            this.txtshowRows.Location = new System.Drawing.Point(921, 16);
+            this.txtshowRows.Location = new System.Drawing.Point(921, 12);
             this.txtshowRows.Multiline = true;
             this.txtshowRows.Name = "txtshowRows";
             this.txtshowRows.Size = new System.Drawing.Size(65, 29);
@@ -158,7 +160,7 @@ namespace TaxRefund
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnRefresh.ForeColor = System.Drawing.Color.Green;
-            this.btnRefresh.Location = new System.Drawing.Point(991, 15);
+            this.btnRefresh.Location = new System.Drawing.Point(991, 11);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(104, 32);
             this.btnRefresh.TabIndex = 70;
@@ -171,6 +173,8 @@ namespace TaxRefund
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.panel2.Controls.Add(this.rdoOpenOffice);
+            this.panel2.Controls.Add(this.rdoExcel);
             this.panel2.Controls.Add(this.btnRefresh);
             this.panel2.Controls.Add(this.txtshowRows);
             this.panel2.Controls.Add(this.label26);
@@ -294,11 +298,11 @@ namespace TaxRefund
             // 
             this.chbMonthlyReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chbMonthlyReport.AutoSize = true;
-            this.chbMonthlyReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbMonthlyReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chbMonthlyReport.ForeColor = System.Drawing.Color.Green;
-            this.chbMonthlyReport.Location = new System.Drawing.Point(747, 240);
+            this.chbMonthlyReport.Location = new System.Drawing.Point(738, 219);
             this.chbMonthlyReport.Name = "chbMonthlyReport";
-            this.chbMonthlyReport.Size = new System.Drawing.Size(128, 22);
+            this.chbMonthlyReport.Size = new System.Drawing.Size(116, 20);
             this.chbMonthlyReport.TabIndex = 169;
             this.chbMonthlyReport.Text = "Monthly Report";
             this.chbMonthlyReport.UseVisualStyleBackColor = true;
@@ -306,11 +310,11 @@ namespace TaxRefund
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnExport.ForeColor = System.Drawing.Color.Green;
-            this.btnExport.Location = new System.Drawing.Point(884, 235);
+            this.btnExport.Location = new System.Drawing.Point(884, 218);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(104, 32);
+            this.btnExport.Size = new System.Drawing.Size(104, 50);
             this.btnExport.TabIndex = 168;
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -319,11 +323,11 @@ namespace TaxRefund
             // btnReport
             // 
             this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnReport.ForeColor = System.Drawing.Color.Green;
-            this.btnReport.Location = new System.Drawing.Point(991, 235);
+            this.btnReport.Location = new System.Drawing.Point(991, 218);
             this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(104, 32);
+            this.btnReport.Size = new System.Drawing.Size(104, 50);
             this.btnReport.TabIndex = 167;
             this.btnReport.Text = "Report";
             this.btnReport.UseVisualStyleBackColor = true;
@@ -628,9 +632,9 @@ namespace TaxRefund
             this.groupBox1.Controls.Add(this.btnSearch);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.groupBox1.Location = new System.Drawing.Point(856, 53);
+            this.groupBox1.Location = new System.Drawing.Point(856, 48);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(249, 172);
+            this.groupBox1.Size = new System.Drawing.Size(249, 162);
             this.groupBox1.TabIndex = 139;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options:";
@@ -639,7 +643,7 @@ namespace TaxRefund
             // 
             this.txtSolanHT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolanHT.ForeColor = System.Drawing.Color.Teal;
-            this.txtSolanHT.Location = new System.Drawing.Point(151, 83);
+            this.txtSolanHT.Location = new System.Drawing.Point(151, 81);
             this.txtSolanHT.Name = "txtSolanHT";
             this.txtSolanHT.Size = new System.Drawing.Size(55, 24);
             this.txtSolanHT.TabIndex = 124;
@@ -649,7 +653,7 @@ namespace TaxRefund
             this.rdoRefundManyTimes.AutoSize = true;
             this.rdoRefundManyTimes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdoRefundManyTimes.ForeColor = System.Drawing.Color.Salmon;
-            this.rdoRefundManyTimes.Location = new System.Drawing.Point(15, 86);
+            this.rdoRefundManyTimes.Location = new System.Drawing.Point(15, 84);
             this.rdoRefundManyTimes.Name = "rdoRefundManyTimes";
             this.rdoRefundManyTimes.Size = new System.Drawing.Size(127, 19);
             this.rdoRefundManyTimes.TabIndex = 123;
@@ -663,7 +667,7 @@ namespace TaxRefund
             this.rdoHighValue.AutoSize = true;
             this.rdoHighValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdoHighValue.ForeColor = System.Drawing.Color.Teal;
-            this.rdoHighValue.Location = new System.Drawing.Point(15, 54);
+            this.rdoHighValue.Location = new System.Drawing.Point(15, 52);
             this.rdoHighValue.Name = "rdoHighValue";
             this.rdoHighValue.Size = new System.Drawing.Size(85, 19);
             this.rdoHighValue.TabIndex = 122;
@@ -677,7 +681,7 @@ namespace TaxRefund
             this.rdoSimilar.AutoSize = true;
             this.rdoSimilar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdoSimilar.ForeColor = System.Drawing.Color.Blue;
-            this.rdoSimilar.Location = new System.Drawing.Point(15, 25);
+            this.rdoSimilar.Location = new System.Drawing.Point(15, 23);
             this.rdoSimilar.Name = "rdoSimilar";
             this.rdoSimilar.Size = new System.Drawing.Size(64, 19);
             this.rdoSimilar.TabIndex = 121;
@@ -691,7 +695,7 @@ namespace TaxRefund
             this.rdoDupplicate.AutoSize = true;
             this.rdoDupplicate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdoDupplicate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.rdoDupplicate.Location = new System.Drawing.Point(151, 56);
+            this.rdoDupplicate.Location = new System.Drawing.Point(151, 54);
             this.rdoDupplicate.Name = "rdoDupplicate";
             this.rdoDupplicate.Size = new System.Drawing.Size(84, 19);
             this.rdoDupplicate.TabIndex = 120;
@@ -705,7 +709,7 @@ namespace TaxRefund
             this.rdoNormal.AutoSize = true;
             this.rdoNormal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdoNormal.ForeColor = System.Drawing.Color.Black;
-            this.rdoNormal.Location = new System.Drawing.Point(151, 27);
+            this.rdoNormal.Location = new System.Drawing.Point(151, 25);
             this.rdoNormal.Name = "rdoNormal";
             this.rdoNormal.Size = new System.Drawing.Size(66, 19);
             this.rdoNormal.TabIndex = 119;
@@ -719,7 +723,7 @@ namespace TaxRefund
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnSearch.ForeColor = System.Drawing.Color.Green;
-            this.btnSearch.Location = new System.Drawing.Point(33, 123);
+            this.btnSearch.Location = new System.Drawing.Point(33, 118);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(187, 36);
             this.btnSearch.TabIndex = 2;
@@ -1045,16 +1049,16 @@ namespace TaxRefund
             // 
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart1.Legends.Add(legend4);
             this.chart1.Location = new System.Drawing.Point(28, 368);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart1.Series.Add(series4);
             this.chart1.Size = new System.Drawing.Size(1112, 376);
             this.chart1.TabIndex = 176;
             this.chart1.Text = "chart1";
@@ -1068,29 +1072,57 @@ namespace TaxRefund
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FloralWhite;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView1.GridColor = System.Drawing.Color.White;
             this.dataGridView1.Location = new System.Drawing.Point(28, 285);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SaddleBrown;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.SaddleBrown;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.Size = new System.Drawing.Size(1112, 459);
             this.dataGridView1.TabIndex = 143;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
+            // 
+            // rdoExcel
+            // 
+            this.rdoExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoExcel.AutoSize = true;
+            this.rdoExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoExcel.ForeColor = System.Drawing.Color.Teal;
+            this.rdoExcel.Location = new System.Drawing.Point(707, 247);
+            this.rdoExcel.Name = "rdoExcel";
+            this.rdoExcel.Size = new System.Drawing.Size(58, 20);
+            this.rdoExcel.TabIndex = 176;
+            this.rdoExcel.TabStop = true;
+            this.rdoExcel.Text = "Excel";
+            this.rdoExcel.UseVisualStyleBackColor = true;
+            // 
+            // rdoOpenOffice
+            // 
+            this.rdoOpenOffice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoOpenOffice.AutoSize = true;
+            this.rdoOpenOffice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoOpenOffice.ForeColor = System.Drawing.Color.Teal;
+            this.rdoOpenOffice.Location = new System.Drawing.Point(782, 247);
+            this.rdoOpenOffice.Name = "rdoOpenOffice";
+            this.rdoOpenOffice.Size = new System.Drawing.Size(92, 20);
+            this.rdoOpenOffice.TabIndex = 177;
+            this.rdoOpenOffice.TabStop = true;
+            this.rdoOpenOffice.Text = "OpenOffice";
+            this.rdoOpenOffice.UseVisualStyleBackColor = true;
             // 
             // frmTracuu
             // 
@@ -1199,5 +1231,7 @@ namespace TaxRefund
         private System.Windows.Forms.TextBox txtTotalBankServiceFee;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.RadioButton rdoExcel;
+        private System.Windows.Forms.RadioButton rdoOpenOffice;
     }
 }

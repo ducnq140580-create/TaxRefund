@@ -1,4 +1,6 @@
 ﻿using Microsoft.Office.Interop.Excel;
+using OfficeOpenXml;
+using OfficeOpenXml.Table;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +21,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
-using static System.Windows.Forms.AxHost;
+using ClosedXML.Excel;
 
 namespace TaxRefund
 {
@@ -90,7 +92,7 @@ namespace TaxRefund
             }
         }
         private void ApplyDataGridViewStyles(DataGridView dataGridView1)
-        {   
+        {
             if (dataGridView1.Rows.Count == 0 || dataGridView1.Columns.Count == 0) return;
 
             DataGridViewCellStyle numberStyle = new DataGridViewCellStyle
@@ -131,7 +133,7 @@ namespace TaxRefund
                 // Calculate and display totals with proper null handling
                 decimal tongsotienvatdh = 0;
                 decimal tongtrigiahhchuavat = 0;
-                decimal tongsotiendvnhh = 0;                
+                decimal tongsotiendvnhh = 0;
 
                 tongsotienvatdh = dgv.Rows
                     .Cast<DataGridViewRow>()
@@ -1244,7 +1246,6 @@ namespace TaxRefund
 
             //string rfDate = txtRfdate.Text.Trim();
             //string rtDate = txtRtdate.Text.Trim();
-
             //DateTime prfdate = DateTime.ParseExact(rfDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             //var rfdate = prfdate.ToString("dd-MM-yyyy");
             //DateTime ptfdate = DateTime.ParseExact(rtDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -1342,7 +1343,91 @@ namespace TaxRefund
             }
         }
 
-        private void ImportBC03()
+private void ExportToOpenOffice()
+    {
+        DateTime now = DateTime.Now;
+
+        try
+        {
+            // 1. Create a new Workbook
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Sheet1");
+
+                // 2. Create Header
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    worksheet.Cell(1, j + 1).Value = dataGridView1.Columns[j].HeaderText;
+                }
+
+                // 3. Populate Data
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    {
+                        var cellValue = dataGridView1.Rows[i].Cells[j].Value;
+                        var cell = worksheet.Cell(i + 2, j + 1);
+
+                        cell.Value = cellValue?.ToString() ?? "";
+
+                            //// Format column 2 as Text (Equivalent to NumberFormat = "@")                           
+                            //if (j == 1) cell.DataType = XLDataType.Text;
+                            
+                        }
+                }
+
+                // 4. Formatting Column Widths
+                worksheet.Column("A").Width = 16;
+                worksheet.Column("B").Width = 16;
+                worksheet.Column("C").Width = 16;
+                worksheet.Column("D").Width = 16;
+                worksheet.Column("E").Width = 30;
+                worksheet.Column("F").Width = 16;
+                worksheet.Column("G").Width = 16;
+                worksheet.Column("J").Width = 16;
+                worksheet.Column("K").Width = 16;
+                worksheet.Column("L").Width = 16;
+                worksheet.Column("M").Width = 16;
+                worksheet.Column("N").Width = 50;
+                worksheet.Column("O").Width = 20;
+                worksheet.Column("P").Width = 20;
+                worksheet.Column("Q").Width = 20;
+
+                // 5. Global Font Styles
+                var dataRange = worksheet.Range("A1", "Q" + (dataGridView1.RowCount + 1));
+                dataRange.Style.Font.FontName = "Times New Roman";
+                dataRange.Style.Font.FontSize = 14;
+
+                // Header specific styling
+                var headerRange = worksheet.Range("A1", "Q1");
+                headerRange.Style.Font.Bold = true;
+                headerRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                headerRange.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+
+                // Specific Number Formats
+                worksheet.Range("J2", "L5000").Style.NumberFormat.Format = "#,##0";
+                worksheet.Range("I2", "I5000").Style.NumberFormat.Format = "dd/MM/yyyy";
+
+                // 6. Save Dialog
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                // OpenOffice/LibreOffice handle .xlsx perfectly, but you can also use .ods if using other libs
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Save File";
+                saveFileDialog.FileName = $"VAT refund report {now:dd-MM-yyyy hhmmss tt}.xlsx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    workbook.SaveAs(saveFileDialog.FileName);
+                    MessageBox.Show("Export Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+    }
+    private void ImportBC03()
         {
             Utility ut = new Utility();
             var conn = ut.OpenDB();
@@ -1377,7 +1462,7 @@ namespace TaxRefund
 
                             //Create connecting object with Excel file
                             OleDbConnection Econn = new OleDbConnection(connectionString);
-                            System.Data.DataTable Exceldt = new System.Data.DataTable();                            
+                            System.Data.DataTable Exceldt = new System.Data.DataTable();
 
                             OleDbDataAdapter dap = new OleDbDataAdapter("Select * from [BC03-BC BAN NGOAI TE$]", Econn);
                             dap.Fill(Exceldt);
@@ -1385,7 +1470,7 @@ namespace TaxRefund
 
                             //dgvNhaplieuExcel.DataSource = Exceldt;
                             //int dong = dgvNhaplieuExcel.RowCount;
-                         
+
                             for (int i = 9; i < Exceldt.Rows.Count - 4; i++)
                             {
                                 DataRow r = Exceldt.Rows[i];
@@ -2334,6 +2419,7 @@ namespace TaxRefund
                 }
                 chbMonthlyReport.Checked = true;
                 rdoSimilar.Checked = true;
+                rdoOpenOffice.Checked = true;
                 dtpRfdate.Value = DateTime.Now;
                 txtRfdate.Text = null;
                 dtpRtdate.Value = DateTime.Now;
@@ -4151,7 +4237,8 @@ namespace TaxRefund
                     .Where(x => Convert.ToDateTime(x.Field<DateTime>("NgayHT")) >= Convert.ToDateTime(startDate) &&
                                 Convert.ToDateTime(x.Field<DateTime>("NgayHT")) <= Convert.ToDateTime(endDate))
                     .GroupBy(x => Convert.ToDateTime(x.Field<DateTime>("NgayHT")).Date)  // Group by date (ignoring time)
-                    .Select(group => new {
+                    .Select(group => new
+                    {
                         Date = group.Key,
                         DistinctCount = group.Select(r => r.Field<string>("SoHC")).Distinct().Count()
                     })
@@ -5154,7 +5241,541 @@ namespace TaxRefund
                 System.Diagnostics.Debug.WriteLine($"Error during Excel cleanup: {ex.Message}");
             }
         }
-        private void btnExport_Click(object sender, EventArgs e)
+
+        //public void ExportReportToOpenOffice(System.Data.DataTable dataTable, string sheetName, string title)
+        //{
+        //    try
+        //    {
+        //        // 1. Date Logic (kept from your original code)
+        //        DateTime now = DateTime.Now;
+        //        DateTime prfdate, prtdate;
+
+        //        bool TryGetDate(System.Windows.Forms.TextBox tb, DateTimePicker dp, out DateTime dt)
+        //        {
+        //            var s = tb.Text?.Trim() ?? string.Empty;
+        //            if (!string.IsNullOrWhiteSpace(s) && DateTime.TryParseExact(s, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+        //                return true;
+        //            dt = dp?.Value ?? DateTime.Now;
+        //            return false;
+        //        }
+
+        //        if (!TryGetDate(txtRfdate, dtpRfdate, out prfdate) || !TryGetDate(txtRtdate, dtpRtdate, out prtdate))
+        //        {
+        //            MessageBox.Show("Please enter valid From/To dates.", "Invalid date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //            return;
+        //        }
+
+        //        string rfdate = prfdate.ToString("dd-MM-yyyy");
+        //        string rtdate = prtdate.ToString("dd-MM-yyyy");
+
+        //        // 2. Initialize Workbook
+        //        using (var workbook = new XLWorkbook())
+        //        {
+        //            var worksheet = workbook.Worksheets.Add(sheetName);
+
+        //            // 3. Setup Page Formatting (OpenOffice Compatible)
+        //            worksheet.PageSetup.PageOrientation = XLPageOrientation.Landscape;
+        //            worksheet.PageSetup.PaperSize = XLPaperSize.A4Paper;
+        //            worksheet.PageSetup.Margins.Top = 0.75; // ClosedXML uses inches
+        //            worksheet.PageSetup.Margins.Bottom = 0.75;
+        //            worksheet.PageSetup.Margins.Left = 1.0;
+        //            worksheet.PageSetup.Margins.Right = 0.75;
+        //            worksheet.Style.Font.FontName = "Times New Roman";
+
+        //            // 4. Create Headers and Title
+        //            CreateHeaders(worksheet, title, now);
+
+        //            // 5. Create Column Headers (Merging and Wrapping)
+        //            CreateColumnHeaders(worksheet);
+
+        //            // 6. Export Data from DataTable
+        //            ExportDataTableToWorksheet(dataTable, worksheet);
+
+        //            // 7. Create Footer Signatures
+        //            CreateFooterSignatures(worksheet, dataTable.Rows.Count + 11);
+
+        //            // 8. Save the File
+        //            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+        //            {
+        //                saveFileDialog.Filter = "Excel Files|*.xlsx";
+        //                saveFileDialog.FileName = $"VAT refund monthly report from {rfdate} to {rtdate} {now:hhmmss tt}.xlsx";
+
+        //                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        //                {
+        //                    workbook.SaveAs(saveFileDialog.FileName);
+        //                    MessageBox.Show("Export Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+        //private void CreateHeaders(IXLWorksheet worksheet, string title, DateTime now)
+        //{
+        //    // CHI CỤC HẢI QUAN
+        //    var header1 = worksheet.Range("A1:C1");
+        //    header1.Merge().Value = "CHI CỤC HẢI QUAN KHU VỰC II";
+        //    header1.Style.Font.Bold = true;
+        //    header1.Style.Font.FontSize = 13;
+        //    header1.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+        //    // Phụ lục I
+        //    var appendix = worksheet.Cell("H1");
+        //    appendix.Value = "Phụ lục I";
+        //    appendix.Style.Font.Bold = true;
+        //    appendix.Style.Font.Italic = true;
+        //    appendix.Style.Font.FontSize = 14;
+
+        //    // Subheader with WrapText
+        //    var header2 = worksheet.Range("A2:C2");
+        //    header2.Merge().Value = "HẢI QUAN CỬA KHẨU\nSÂN BAY QUỐC TẾ TÂN SƠN NHẤT";
+        //    header2.Style.Font.Bold = true;
+        //    header2.Style.Font.FontSize = 13;
+        //    header2.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+        //    header2.Style.Alignment.WrapText = true;
+        //    worksheet.Row(2).Height = 33;
+
+        //    // Main Report Title
+        //    var reportTitle = worksheet.Range("A5:J5");
+        //    reportTitle.Merge().Value = title;
+        //    reportTitle.Style.Font.Bold = true;
+        //    reportTitle.Style.Font.FontSize = 14;
+        //    reportTitle.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+        //    //// Assuming your header is in A2:C2 (based on your previous code)
+        //    //var headerRange = worksheet.Range("A2:C2");
+
+        //    //// Apply a bottom border to create the "line" effect
+        //    //headerRange.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+        //    //headerRange.Style.Border.BottomBorderColor = XLColor.Black;
+
+        //    //// Optional: Add a small gap by adjusting the row height
+        //    //worksheet.Row(2).Height = 35;
+
+        //    // Date Subtitle
+        //    var reportSubtitle = worksheet.Range("A6:J6");
+        //    reportSubtitle.Merge().Value = $"(Đính kèm công văn số:        /BC-CKTSN ngày     /{now.Month:00}/{now.Year:0000})";
+        //    reportSubtitle.Style.Font.FontSize = 14;
+        //    reportSubtitle.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+        //}
+
+        //private void CreateColumnHeaders(IXLWorksheet worksheet)
+        //{
+        //    // Define column widths for specific columns
+        //    worksheet.Column("A").Width = 6;  // STT
+        //    worksheet.Column("B").Width = 25; // MẶT HÀNG
+        //    worksheet.Column("C").Width = 15; // Trị giá - Trong tháng
+        //    worksheet.Column("D").Width = 15; // Trị giá - Lũy kế
+        //    worksheet.Column("E").Width = 15; // Thuế - Trong tháng
+        //    worksheet.Column("F").Width = 15; // Thuế - Lũy kế
+        //    worksheet.Column("G").Width = 12; // Ngân hàng - Trong tháng
+        //    worksheet.Column("H").Width = 12; // Ngân hàng - Lũy kế
+        //    worksheet.Column("I").Width = 10; // Người nước ngoài - Trong tháng
+        //    worksheet.Column("J").Width = 10; // Người nước ngoài - Lũy kế
+
+        //    // Individual labels and Merging
+        //    worksheet.Range("A8:A9").Merge().Value = "STT";
+        //    worksheet.Range("B8:B9").Merge().Value = "MẶT HÀNG";
+
+        //    // Trị giá hàng hoàn thuế
+        //    worksheet.Range("C8:D8").Merge().Value = "TRỊ GIÁ HÀNG HOÀN THUẾ (ĐỒNG)";
+        //    worksheet.Cell("C9").Value = "Trong tháng";
+        //    worksheet.Cell("D9").Value = "Lũy kế đến kỳ báo cáo";
+
+        //    // Số tiền thuế GTGT
+        //    worksheet.Range("E8:F8").Merge().Value = "SỐ TIỀN THUẾ GTGT ĐƯỢC HOÀN (ĐỒNG)";
+        //    worksheet.Cell("E9").Value = "Trong tháng";
+        //    worksheet.Cell("F9").Value = "Lũy kế đến kỳ báo cáo";
+
+        //    // Số tiền dịch vụ Ngân hàng
+        //    worksheet.Range("G8:H8").Merge().Value = "SỐ TIỀN DỊCH VỤ NGÂN HÀNG ĐƯỢC HƯỞNG (ĐỒNG)";
+        //    worksheet.Cell("G9").Value = "Trong tháng";
+        //    worksheet.Cell("H9").Value = "Lũy kế đến kỳ báo cáo";
+
+        //    // Số lượng người nước ngoài
+        //    worksheet.Range("I8:J8").Merge().Value = "SỐ LƯỢNG NGƯỜI NƯỚC NGOÀI ĐÃ ĐƯỢC HOÀN THUẾ (NGƯỜI)";
+        //    worksheet.Cell("I9").Value = "Trong tháng";
+        //    worksheet.Cell("J9").Value = "Lũy kế đến kỳ báo cáo";
+
+        //    // Global style for the entire header block (A8 to J9)
+        //    var headerBlock = worksheet.Range("A8:J9");
+        //    headerBlock.Style.Font.Bold = true;           
+        //    headerBlock.Style.Font.FontSize = 11;
+        //    headerBlock.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+        //    headerBlock.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+        //    headerBlock.Style.Alignment.WrapText = true;
+
+        //    // Apply Borders
+        //    headerBlock.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+        //    headerBlock.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+
+        //    // Set row heights to match original Interop logic
+        //    worksheet.Row(8).Height = 60;
+        //    worksheet.Row(9).Height = 50;
+        //}
+        //private void ExportDataTableToWorksheet(System.Data.DataTable dataTable, IXLWorksheet worksheet)
+        //{
+        //    if (dataTable.Rows.Count == 0) return;
+
+        //    // 1. Setup starting positions
+        //    int rowStart = 10;
+        //    int columnStart = 1;
+
+        //    // 2. Insert Data directly from DataTable (No array conversion needed!)
+        //    // This is the fastest way to inject data into OpenXML/OpenOffice files
+        //    var insertedRange = worksheet.Cell(rowStart, columnStart).InsertData(dataTable);
+
+        //    // 3. Calculate the exact range of the inserted data
+        //    int rowEnd = rowStart + dataTable.Rows.Count - 1;
+        //    int columnEnd = dataTable.Columns.Count;
+        //    var dataRange = worksheet.Range(rowStart, columnStart, rowEnd, columnEnd);
+
+        //    //4.Apply formatting to the entire data range
+        //    // 1.Borders: In ClosedXML, you set both Outside and Inside for a grid effect
+        //        dataRange.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+        //    dataRange.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+
+        //    // 2. Text Wrapping
+        //    dataRange.Style.Alignment.WrapText = true;
+
+        //    // 3. Font (Redundant if set at sheet level, but good for safety)
+        //    dataRange.Style.Font.FontName = "Times New Roman";
+        //    dataRange.Style.Font.FontSize = 12;
+
+        //    // 4. Number Format (Thousands separator)
+        //    dataRange.Style.NumberFormat.Format = "#,##0";
+
+        //    // 5. Alignment
+        //    dataRange.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+        //    dataRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+
+        //    // 5. Apply specific column formatting (STT alignment, etc.)
+        //    ApplyColumnSpecificFormatting(worksheet, rowStart, rowEnd, columnStart, columnEnd);
+        //}
+
+        //private void ApplyColumnSpecificFormatting(IXLWorksheet worksheet, int rowStart, int rowEnd, int columnStart, int columnEnd)
+        //{
+        //    // 1. Center align STT column (Column A)            
+        //    var sttRange = worksheet.Range(rowStart, columnStart, rowEnd, columnStart);
+        //    sttRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+        //    // 2. Left align description column (Column B)
+        //    var descriptionRange = worksheet.Range(rowStart, columnStart + 1, rowEnd, columnStart + 1);
+        //    descriptionRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;           
+
+        //    // 3. AutoFit for the description column
+        //    // In ClosedXML, you usually AutoFit the entire column or the specific range
+        //    worksheet.Column(columnStart + 1).AdjustToContents();
+
+        //    // Note: If you want the description to wrap instead of making the column 
+        //    // very wide, use this instead of AdjustToContents:
+        //    descriptionRange.Style.Alignment.WrapText = true;
+        //}
+        //private void CreateFooterSignatures(IXLWorksheet worksheet, int startRow)
+        //{
+        //    // Maker
+        //    var maker = worksheet.Range(startRow, 2, startRow, 3);
+        //    maker.Merge().Value = "NGƯỜI LẬP";
+        //    maker.Style.Font.Bold = true;
+        //    maker.Style.Font.FontSize = 13;
+        //    maker.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+        //    var makerName = worksheet.Range("B18:C18");            
+        //    string userName = ((Form)this.MdiParent).Controls["lblUserName"].Text;
+        //    makerName.Merge()
+        //             .SetValue(userName);
+        //    makerName.Style.Font.Bold = true;
+        //    makerName.Style.Font.FontSize = 14;
+        //    makerName.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+        //    makerName.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+
+        //    // Signatories
+        //    var signatory1 = worksheet.Range(startRow, 7, startRow, 8);
+        //    signatory1.Merge().Value = "KT. ĐỘI TRƯỞNG";
+        //    signatory1.Style.Font.Bold = true;
+        //    signatory1.Style.Font.FontSize = 13;
+        //    signatory1.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+        //    var headSignatory2 = worksheet.Range("G13:H13");           
+        //    headSignatory2.Merge()
+        //                 .SetValue("PHÓ ĐỘI TRƯỞNG");
+        //    headSignatory2.Style.Font.Bold = true;
+        //    headSignatory2.Style.Font.FontSize = 13;
+        //    headSignatory2.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+        //    headSignatory2.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+        //}
+        private bool TryParseReportDates(out DateTime start, out DateTime end)
+        {
+            // Local helper to parse individual fields
+            bool TryGetDate(System.Windows.Forms.TextBox tb, DateTimePicker dp, out DateTime dt)
+            {
+                string s = tb.Text?.Trim() ?? string.Empty;
+
+                // Attempt to parse the text box input first
+                if (!string.IsNullOrWhiteSpace(s) &&
+                    DateTime.TryParseExact(s, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+                {
+                    return true;
+                }
+
+                // Fallback to the DateTimePicker value if text parsing fails
+                if (dp != null)
+                {
+                    dt = dp.Value;
+                    return true;
+                }
+
+                dt = DateTime.Now;
+                return false;
+            }
+
+            // Execute parsing for both Start (From) and End (To) dates
+            bool startValid = TryGetDate(txtRfdate, dtpRfdate, out start);
+            bool endValid = TryGetDate(txtRtdate, dtpRtdate, out end);
+
+            if (!startValid || !endValid)
+            {
+                MessageBox.Show("Please enter valid dates in the format dd/MM/yyyy.",
+                                "Invalid Date Input",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+        public void ExportReportToOpenOffice(System.Data.DataTable dataTable, string sheetName, string title)
+    {
+        try
+        {
+            // 1. Date Logic
+            if (!TryParseReportDates(out DateTime start, out DateTime end)) return;
+
+            string rfdate = start.ToString("dd-MM-yyyy");
+            string rtdate = end.ToString("dd-MM-yyyy");
+            DateTime now = DateTime.Now;
+
+            // 2. Initialize Workbook
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add(sheetName);
+
+                // Set Global Default Font
+                worksheet.Style.Font.FontName = "Times New Roman";
+
+                // 3. Setup Page & Report Structure
+                SetupPageFormatting(worksheet);
+                CreateHeaders(worksheet, title, now);
+                CreateColumnHeaders(worksheet);
+
+                // 4. Export Data
+                ExportDataTableToWorksheet(dataTable, worksheet);
+
+                // 5. Footer Signatures (Dynamic positioning)
+                int signatureStartRow = 10 + dataTable.Rows.Count + 3;
+                CreateFooterSignatures(worksheet, signatureStartRow);
+
+                // 6. Save Dialog
+                SaveReport(workbook, rfdate, rtdate, now);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Export Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+        #region Helper Methods
+
+        private void SetupPageFormatting(IXLWorksheet worksheet)
+        {
+            var ps = worksheet.PageSetup;
+            ps.PageOrientation = XLPageOrientation.Landscape;
+            ps.PaperSize = XLPaperSize.A4Paper;
+            ps.Margins.SetTop(0.75).SetBottom(0.75).SetLeft(0.75).SetRight(0.5);
+        }
+
+        private void CreateHeaders(IXLWorksheet worksheet, string title, DateTime now)
+        {
+            // Department Info
+            var headerRange = worksheet.Range("A1:C1").Merge();
+            headerRange.Value = "CHI CỤC HẢI QUAN KHU VỰC II";
+            headerRange.Style.Font.SetBold();
+            headerRange.Style.Font.FontSize = 13;
+            headerRange.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+            var subHeader = worksheet.Range("A2:C2").Merge();
+            subHeader.Value = "HẢI QUAN CỬA KHẨU\nSÂN BAY QUỐC TẾ TÂN SƠN NHẤT";
+            subHeader.Style.Font.SetBold();
+            subHeader.Style.Font.FontSize = 13;
+            subHeader.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            subHeader.Style.Alignment.SetWrapText();
+            worksheet.Row(2).Height = 29;          
+
+            // Appendix
+            worksheet.Cell("H1").SetValue("Phụ lục I");
+            worksheet.Cell("H1").Style.Font.SetBold();
+            worksheet.Cell("H1").Style.Font.Italic = true;
+            worksheet.Cell("H1").Style.Font.FontSize = 14;
+
+            // Main Titles
+            worksheet.Range("A5:J5").Merge().SetValue(title).Style.Font.SetBold();
+            worksheet.Range("A5:J5").Style.Font.FontSize = 14;
+            worksheet.Range("A5:J5").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+            string subTitleStr = $"(Đính kèm công văn số:        /BC-CKTSN ngày     /{now.Month:00}/{now.Year:0000})";
+            worksheet.Range("A6:J6").Merge().SetValue(subTitleStr);
+            worksheet.Range("A6:J6").Style.Font.FontSize = 14;
+            worksheet.Range("A6:J6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+        }
+
+        private void CreateColumnHeaders(IXLWorksheet worksheet)
+        {
+            // Set Column Widths
+            double[] widths = { 5, 21, 15, 15, 15, 15, 12, 12, 8, 8 };
+            for (int i = 0; i < widths.Length; i++) worksheet.Column(i + 1).Width = widths[i];
+
+            // Labels & Merging
+            worksheet.Range("A8:A9").Merge().SetValue("STT");
+            worksheet.Range("B8:B9").Merge().SetValue("MẶT HÀNG");
+
+            worksheet.Range("C8:D8").Merge().SetValue("TRỊ GIÁ HÀNG HOÀN THUẾ (ĐỒNG)");
+            worksheet.Cell("C9").Value = "Trong tháng";
+            worksheet.Cell("D9").Value = "Lũy kế đến kỳ báo cáo";
+
+            worksheet.Range("E8:F8").Merge().SetValue("SỐ TIỀN THUẾ GTGT ĐƯỢC HOÀN (ĐỒNG)");
+            worksheet.Cell("E9").Value = "Trong tháng";
+            worksheet.Cell("F9").Value = "Lũy kế đến kỳ báo cáo";
+
+            worksheet.Range("G8:H8").Merge().SetValue("SỐ TIỀN DỊCH VỤ NGÂN HÀNG ĐƯỢC HƯỞNG (ĐỒNG)");
+            worksheet.Cell("G9").Value = "Trong tháng";
+            worksheet.Cell("H9").Value = "Lũy kế đến kỳ báo cáo";
+
+            worksheet.Range("I8:J8").Merge().SetValue("SỐ LƯỢNG NGƯỜI NƯỚC NGOÀI (NGƯỜI)");
+            worksheet.Cell("I9").Value = "Trong tháng";
+            worksheet.Cell("J9").Value = "Lũy kế đến kỳ báo cáo";
+
+            // Header Styling
+            var headerBlock = worksheet.Range("A8:J9");
+            headerBlock.Style.Font.SetBold();
+            headerBlock.Style.Font.FontSize = 11;
+            headerBlock.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            headerBlock.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+            headerBlock.Style.Alignment.WrapText = true;
+            headerBlock.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            headerBlock.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+
+            worksheet.Row(8).Height = 60;
+            worksheet.Row(9).Height = 50;
+        }
+        private void SaveReport(XLWorkbook workbook, string rfdate, string rtdate, DateTime now)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                // Define the file type and default extension
+                saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                saveFileDialog.DefaultExt = "xlsx";
+
+                // Construct a clean, descriptive filename               
+                string fileName = $"VAT_Refund_Monthly_Report_{rfdate}_to_{rtdate}_{now:HHmmss}.xlsx";
+                saveFileDialog.FileName = fileName;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Save the file to the chosen path
+                        workbook.SaveAs(saveFileDialog.FileName);
+
+                        MessageBox.Show("Report exported successfully!", "Export Success",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Optional: Automatically open the file after saving
+                        // System.Diagnostics.Process.Start(saveFileDialog.FileName);
+                    }
+                    catch (IOException ex)
+                    {
+                        // Handle cases where the file is already open in Excel/OpenOffice
+                        MessageBox.Show("Cannot save file. Please close the file if it is currently open in another program and try again.\n\n" + ex.Message,
+                                        "File Access Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        private void ExportDataTableToWorksheet(System.Data.DataTable dt, IXLWorksheet worksheet)
+    {
+        if (dt.Rows.Count == 0) return;
+
+            int rowStart = 10;
+            worksheet.Cell(rowStart, 1).InsertData(dt);
+
+            var dataRange = worksheet.Range(rowStart, 1, rowStart + dt.Rows.Count - 1, dt.Columns.Count);
+            //Force a specific range to be numeric(Columns C to J)            
+            foreach (var cell in dataRange.Cells())
+            {
+                if (decimal.TryParse(cell.Value.ToString(), out decimal val))
+                {
+                    cell.Value = val; // Re-assigning as a numeric type
+                }
+            }            
+            // Apply Thousand Separator & General Formatting
+            dataRange.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            dataRange.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+            dataRange.Style.Font.SetFontSize(12);
+            dataRange.Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
+            dataRange.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+            dataRange.Style.Alignment.WrapText = true;
+
+            // Thousand Separator Format: #,##0
+            dataRange.Style.NumberFormat.Format = "#,##0";
+
+        ApplyColumnSpecificFormatting(worksheet, rowStart, rowStart + dt.Rows.Count - 1);
+    }
+
+        private void ApplyColumnSpecificFormatting(IXLWorksheet ws, int start, int end)
+        {
+            ws.Range(start, 1, end, 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center); // STT
+            ws.Range(start, 2, end, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);   // Name
+            ws.Row(10).Height = 70; // Optional: Set a default row height for better appearance
+            ws.Column(2).Width = 20;
+            ws.Style.Alignment.WrapText = true;    
+            ws.Style.Font.FontSize = 11;
+        }
+
+    private void CreateFooterSignatures(IXLWorksheet worksheet, int row)
+    {
+        string userName = ((Form)this.MdiParent).Controls["lblUserName"].Text;
+
+            // Left Side - Maker
+            worksheet.Range(row, 2, row, 3).Merge().SetValue("NGƯỜI LẬP").Style.Font.SetBold();
+            worksheet.Range(row, 2, row, 3).Style.Font.FontSize = 13;
+            worksheet.Range(row, 2, row, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            worksheet.Range(row, 2, row, 3).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);           
+
+            worksheet.Range(row + 5, 2, row + 5, 3).Merge().SetValue(userName).Style.Font.SetBold();
+            worksheet.Range(row + 5, 2, row + 5, 3).Style.Font.FontSize = 14;
+            worksheet.Range(row + 5, 2, row + 5, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            worksheet.Range(row + 5, 2, row + 5, 3).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
+            worksheet.Row(row + 5).Height = 20; // Optional: Increase row height for better appearance
+
+            // Right Side - Signatories
+            worksheet.Range(row - 1, 7, row - 1, 8).Merge().SetValue("KT. ĐỘI TRƯỞNG").Style.Font.SetBold();
+            worksheet.Range(row - 1, 7, row - 1, 8).Style.Font.FontSize = 13;
+            worksheet.Range(row - 1, 7, row - 1, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            worksheet.Range(row - 1, 7, row - 1, 8).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
+
+            worksheet.Range(row, 7, row, 8).Merge().SetValue("PHÓ ĐỘI TRƯỞNG").Style.Font.SetBold();
+            worksheet.Range(row, 7, row, 8).Style.Font.FontSize = 13;
+            worksheet.Range(row, 7, row, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            worksheet.Range(row, 7, row, 8).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
+        }
+
+    #endregion
+    private void btnExport_Click(object sender, EventArgs e)
         {
             try
             {
@@ -5205,12 +5826,25 @@ namespace TaxRefund
 
                         dataTable.Rows.Add(dtrow);
                     }
-
-                    ExportReport(dataTable, "Sheet1", "BÁO CÁO TÌNH HÌNH HOÀN THUẾ GTGT CHO NGƯỜI NƯỚC NGOÀI XUẤT CẢNH");
+                    if (rdoOpenOffice.Checked)
+                    {
+                        ExportReportToOpenOffice(dataTable, "Sheet1", "BÁO CÁO TÌNH HÌNH HOÀN THUẾ GTGT CHO NGƯỜI NƯỚC NGOÀI XUẤT CẢNH");
+                    }
+                    else
+                    {
+                        ExportReport(dataTable, "Sheet1", "BÁO CÁO TÌNH HÌNH HOÀN THUẾ GTGT CHO NGƯỜI NƯỚC NGOÀI XUẤT CẢNH");
+                    }
                 }
-                else // chbMonthlyReport == false
+                else // chbMonthlyReport.Check == false
                 {
-                    ExportExcel();
+                    if (rdoOpenOffice.Checked)
+                    {
+                        ExportToOpenOffice();
+                    }
+                    else
+                    {
+                        ExportExcel();
+                    }
                 }
             }
             catch (Exception ex)
