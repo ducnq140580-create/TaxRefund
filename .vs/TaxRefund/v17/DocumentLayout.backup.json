@@ -15,8 +15,8 @@
       "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:TaxRefund\\frmLogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\taxrefund\\mdiparentmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:taxrefund\\mdiparentmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\MDIParentMain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|solutionrelative:TaxRefund\\MDIParentMain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8BBD4006-E5AF-42E8-A08D-7FBE5E48C3BA}|TaxRefund\\TaxRefund.csproj|C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\taxrefund\\mdiparentmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -56,7 +56,7 @@
               "RelativeDocumentMoniker": "TaxRefund\\frmTracuu.cs",
               "ToolTip": "C:\\Users\\HP\\Source\\Repos\\ducnq140580-create\\TaxRefund\\TaxRefund\\frmTracuu.cs",
               "RelativeToolTip": "TaxRefund\\frmTracuu.cs",
-              "ViewState": "AgIAAOEVAAAAAAAAAAAUwPQVAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAABcUAAAAAAAAAAAhwB8UAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-23T03:43:40.491Z",
               "EditorCaption": ""

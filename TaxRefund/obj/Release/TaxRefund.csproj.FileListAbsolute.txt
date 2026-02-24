@@ -78,7 +78,6 @@ C:\Users\HP\Source\Repos\ducnq140580-create\TaxRefund\TaxRefund\bin\Release\Syst
 C:\Users\HP\Source\Repos\ducnq140580-create\TaxRefund\TaxRefund\bin\Release\System.Security.Cryptography.Xml.xml
 C:\Users\HP\Source\Repos\ducnq140580-create\TaxRefund\TaxRefund\bin\Release\OdsReaderWriter.dll
 C:\Users\HP\Source\Repos\ducnq140580-create\TaxRefund\TaxRefund\bin\Release\System.Text.Encoding.CodePages.xml
-C:\Users\HP\Source\Repos\ducnq140580-create\TaxRefund\TaxRefund\obj\Release\TaxRefund.exe.config
 C:\Users\HP\Source\Repos\ducnq140580-create\TaxRefund\TaxRefund\bin\Release\ClosedXML.dll
 C:\Users\HP\Source\Repos\ducnq140580-create\TaxRefund\TaxRefund\bin\Release\ClosedXML.Parser.dll
 C:\Users\HP\Source\Repos\ducnq140580-create\TaxRefund\TaxRefund\bin\Release\DocumentFormat.OpenXml.dll
